@@ -5,21 +5,24 @@ export default function HeaderTabs() {
   return (
     <View style={{ flexDirection: "row", alignSelf: "center" }}>
       <HeaderButton title="Delivery" />
-      <HeaderButton title="Pickup" />
+      <HeaderButton title="Pickup" btnColor="white" textColor="black" />
     </View>
   );
 }
 
-const HeaderButton = ({ title }) => {
+const HeaderButton = ({ title, btnColor = "black", textColor = "white" }) => {
   return (
     <TouchableOpacity
       style={{
-        backgroundColor: "black",
+        backgroundColor: `${btnColor}`,
         paddingVertical: 6,
         paddingHorizontal: 16,
+        borderRadius: 30,
       }}
     >
-      <Text style={{ color: "white" }}>{title}</Text>
+      <Text style={{ color: `${textColor}`, fontSize: 15, fontWeight: "900" }}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
