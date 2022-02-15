@@ -22,10 +22,10 @@ export default function HeaderTabs() {
 
 const HeaderButton = (props) => {
   const handleClick = () => {
-    console.log("clicked on:", props.text);
-    console.log("before calling set, activeTab = ", props.activeTab);
+    // console.log("clicked on:", props.text);
+    // console.log("before calling set, activeTab = ", props.activeTab);
     props.setActiveTab(props.text);
-    console.log("after calling set, activeTab = ", props.activeTab);
+    // console.log("after calling set, activeTab = ", props.activeTab);
   };
   return (
     <TouchableOpacity
