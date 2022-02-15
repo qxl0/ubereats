@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 export default function SearchBar() {
   return (
@@ -35,11 +36,15 @@ export default function SearchBar() {
               flexDirection: "row",
               backgroundColor: "white",
               borderRadius: 50,
-              padding: 5,
+              padding: 10,
               alignItems: "center",
             }}
           >
-            <Ionicons name="ios-search-sharp" size={24} />
+            <AntDesign
+              style={{ marginRight: 5 }}
+              name="clockcircle"
+              size={11}
+            />
             <Text>Search</Text>
           </View>
         )}
