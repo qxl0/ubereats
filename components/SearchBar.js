@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function SearchBar() {
   return (
@@ -22,6 +23,11 @@ export default function SearchBar() {
             marginRight: 10,
           },
         }}
+        renderLeftButton={() => (
+          <View>
+            <Ionicons name="ios-location-sharp" size={24} />
+          </View>
+        )}
       />
     </View>
   );
