@@ -48,8 +48,18 @@ const RestaurantInfo = () => (
       <Text style={{ fontSize: 15, fontWeight: "bold" }}>
         Farmhouse Kitchen Thai Cuisine
       </Text>
-      <Text> 30-45. min</Text>
+      <Text style={{ fontSize: 13, color: "gray" }}> 30-45. min</Text>
     </View>
-    <Text>4.5</Text>
+    <View
+      style={{
+        backfaceVisibility: "#eee",
+        height: 30,
+        width: 30,
+        alignItems: "center",
+        borderRadius: 15,
+      }}
+    >
+      <Text>4.5</Text>
+    </View>
   </View>
 );
