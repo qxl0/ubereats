@@ -4,12 +4,25 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 export default function RestaurantItem() {
   return (
-    <View>
-      {/* Image */}
-      <RestaurantImage />
-      {/* info */}
-      <RestaurantInfo />
-    </View>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={{
+        marginBottom: 30,
+      }}
+    >
+      <View
+        style={{
+          marginTop: 10,
+          padding: 15,
+          backgroundColor: "white",
+        }}
+      >
+        {/* Image */}
+        <RestaurantImage />
+        {/* info */}
+        <RestaurantInfo />
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -56,6 +69,7 @@ const RestaurantInfo = () => (
         height: 30,
         width: 30,
         alignItems: "center",
+        justifyContent: "center",
         borderRadius: 15,
       }}
     >
