@@ -13,6 +13,8 @@ const YELP_API_KEY =
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState(localRestaurants);
   const [city, setCity] = useState("Malvern, PA");
+  const [activeTab, setActiveTab] = useState("Delivery");
+
   const getRestaurants = async () => {
     const yelpurl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}'&limit=50`;
 
@@ -25,18 +27,21 @@ export default function Home() {
     return fetch(yelpurl, apiOptions)
       .then((res) => res.json())
       .then((json) => {
-        console.log("json", json);
-        setRestaurantData(json.businesses);
+        setRestaurantData(
+          json.businesses.filter((business) =>
+            business.transactions.includes(activeTab.toLowerCase())
+          )
+        );
       });
   };
 
   useEffect(() => {
     getRestaurants();
-  }, []);
+  }, [city]);
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", padding: 15 }}>
-        <HeaderTabs />
+        <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <SearchBar cityHandler={setCity} />
 
         <ScrollView showVerticalScrollINdicator={false}>
