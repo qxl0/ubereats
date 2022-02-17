@@ -12,8 +12,10 @@ export default function BottomTabs() {
       }}
     >
       <Icon icon="home" text="Home" />
-      <Text>BottomTabs</Text>
-      <Text>BottomTabs</Text>
+      <Icon icon="search" text="Browse" />
+      <Icon icon="shopping-bag" text="Grocery" />
+      <Icon icon="receipt" text="Orders" />
+      <Icon icon="user" text="Account" />
     </View>
   );
 }
