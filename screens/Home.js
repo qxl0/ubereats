@@ -6,7 +6,9 @@ import Categories from "../components/Categories";
 import RestaurantItems, {
   localRestaurants,
 } from "../components/RestaurantItems";
-
+import BottomTabs from "../components/BottomTabs";
+import { Divider } from "react-native-elements";
+// import SafeAreaView from "react-native-safe-area-view";
 const YELP_API_KEY =
   "p3_HRi88-pD970fEe7QHFAn5wR4E4lSmwABT5L-U6rCWkaiP7W7ti4ohp_In2ACB_uq1nWMayrtyjdCbi0t_FK2fraE-_EKl9-zVNBt8mEYu4q6jTaLhSgqcu5UNYnYx";
 
@@ -43,12 +45,13 @@ export default function Home() {
       <View style={{ backgroundColor: "white", padding: 15 }}>
         <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <SearchBar cityHandler={setCity} />
-
-        <ScrollView showVerticalScrollINdicator={false}>
-          <Categories />
-          <RestaurantItems restaurantsData={restaurantData} />
-        </ScrollView>
       </View>
+      <ScrollView showVerticalScrollINdicator={false}>
+        <Categories />
+        <RestaurantItems restaurantsData={restaurantData} />
+      </ScrollView>
+      <Divider />
+      <BottomTabs />
     </SafeAreaView>
   );
 }
