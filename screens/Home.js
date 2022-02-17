@@ -12,10 +12,9 @@ const YELP_API_KEY =
 
 export default function Home() {
   const [restaurantData, setRestaurantData] = useState(localRestaurants);
-
+  const [city, setCity] = useState("Malvern, PA");
   const getRestaurants = async () => {
-    const yelpurl =
-      "https://api.yelp.com/v3/businesses/search?term=restaurants&location=philadelphia&limit=50";
+    const yelpurl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}'&limit=50`;
 
     const apiOptions = {
       headers: {
@@ -38,7 +37,7 @@ export default function Home() {
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", padding: 15 }}>
         <HeaderTabs />
-        <SearchBar />
+        <SearchBar cityHandler={setCity} />
 
         <ScrollView showVerticalScrollINdicator={false}>
           <Categories />
