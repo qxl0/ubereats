@@ -49,7 +49,7 @@ export default function RestaurantItems({ restaurantsData }) {
           key={index}
         >
           {/* Image */}
-          <RestaurantImage image={restaurant.image_url} />
+          <RestaurantImage image={restaurant?.image_url} />
           {/* info */}
           <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
         </View>
