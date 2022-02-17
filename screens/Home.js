@@ -37,7 +37,7 @@ export default function Home() {
 
   useEffect(() => {
     getRestaurants();
-  }, [city]);
+  }, [city, activeTab]);
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", padding: 15 }}>
