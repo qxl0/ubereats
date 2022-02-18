@@ -18,7 +18,7 @@ const foods = [
 ];
 export default function MenuItem() {
   return (
-    <View>
+    <View style={styles.menuItemStyle}>
       {/* food info */}
       <FoodInfo food={foods[0]} />
       {/* food image */}
@@ -28,7 +28,7 @@ export default function MenuItem() {
 }
 
 const FoodInfo = ({ food }) => (
-  <View>
+  <View style={styles.foodInfo}>
     <Text>{food.title}</Text>
     <Text>{food.description}</Text>
     <Text>{food.price}</Text>
@@ -45,5 +45,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     margin: 20,
+  },
+  foodInfo: {
+    width: 240,
+    justifyContent: "space-evenly",
   },
 });
