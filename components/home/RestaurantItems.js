@@ -44,7 +44,16 @@ export default function RestaurantItems({
           style={{
             marginBottom: 30,
           }}
-          onPress={() => navigation.navigate("RestaurantDetail")}
+          onPress={() =>
+            navigation.navigate("RestaurantDetail", {
+              name: restaurant.name,
+              image: restaurant.image_url,
+              price: restaurant.price,
+              reviews: restaurant.review_count,
+              rating: restaurant.rating,
+              categories: restaurant.categories,
+            })
+          }
         >
           <View
             style={{
