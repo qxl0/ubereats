@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
-import About from "../components/home/restaurantDetail/About";
 import { Divider } from "react-native-elements";
+import About from "../components/restaurantDetail/About";
 
 export default function RestaurantDetail() {
   return (
