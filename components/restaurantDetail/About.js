@@ -8,12 +8,16 @@ const yelpRestaurantInfo = {
   price: "$$",
   reviews: "1500",
   rating: 4.5,
-  categories: [{ title: "Thai" }, { title: "Comfort Food" }],
+  categories: [
+    { title: "Thai" },
+    { title: "Comfort Food" },
+    { title: "Vegetarian" },
+  ],
 };
 
 const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo;
 
-const formattedCategories = categories.map((cat) => cat.title).join(" 🔻");
+const formattedCategories = categories.map((cat) => cat.title).join(" ♦️ ");
 
 const description = `${formattedCategories} ${
   price ? " * " + price : ""
