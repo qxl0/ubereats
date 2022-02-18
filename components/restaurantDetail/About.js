@@ -23,7 +23,7 @@ const description = `${formattedCategories} ${
   price ? " * " + price : ""
 } ${rating} ⭐ (${reviews})`;
 
-export default function About() {
+export default function About({ route }) {
   return (
     <View>
       <RestaurantImage image={image} />
