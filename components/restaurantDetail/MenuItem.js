@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 
-const foods = [
+const foodsList = [
   {
     title: "Lasagna",
     description: "A delicious pasta dish",
@@ -18,18 +18,22 @@ const foods = [
 ];
 export default function MenuItem() {
   return (
-    <View style={styles.menuItemStyle}>
-      {/* food info */}
-      <FoodInfo food={foods[0]} />
-      {/* food image */}
-      <FoodImage food={foods[0]} />
-    </View>
+    <>
+      {foodsList.map((food, index) => (
+        <View key={index}>
+          <View style={styles.menuItemStyle}>
+            <FoodInfo food={food} />
+            <FoodImage food={food} />
+          </View>
+        </View>
+      ))}
+    </>
   );
 }
 
 const FoodInfo = ({ food }) => (
   <View style={styles.foodInfo}>
-    <Text>{food.title}</Text>
+    <Text style={styles.titleStyle}>{food.title}</Text>
     <Text>{food.description}</Text>
     <Text>{food.price}</Text>
   </View>
@@ -37,7 +41,10 @@ const FoodInfo = ({ food }) => (
 
 const FoodImage = ({ food }) => (
   <View>
-    <Image source={food.image} />
+    <Image
+      source={{ uri: food.image }}
+      style={{ width: 100, height: 100, borderRadius: 20 }}
+    />
   </View>
 );
 const styles = StyleSheet.create({
@@ -49,5 +56,9 @@ const styles = StyleSheet.create({
   foodInfo: {
     width: 240,
     justifyContent: "space-evenly",
+  },
+  titleStyle: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
