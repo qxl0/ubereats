@@ -1,16 +1,29 @@
 import { View, Image, Text } from "react-native";
 import React from "react";
 
-const image =
-  "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg";
+const yelpRestaurantInfo = {
+  name: "Farmhouse Kitchen Thai Cuisine",
+  image:
+    "https://media.istockphoto.com/photos/food-backgrounds-table-filled-with-large-variety-of-food-picture-id1155240408?k=20&m=1155240408&s=612x612&w=0&h=Zvr3TwVQ-wlfBnvGrgJCtv-_P_LUcIK301rCygnirbk=",
+  price: "$$",
+  reviews: "1500",
+  rating: 4.5,
+  categories: [{ title: "Thai" }, { title: "Comfort Food" }],
+};
 
-const title = "Farmhouse Kitchen Thai Cuisine";
-const description = "Thai  Comfort Food Restaurant $$ 4.5 ⭐ (2900+)";
+const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo;
+
+const formattedCategories = categories.map((cat) => cat.title).join(" 🔻");
+
+const description = `${formattedCategories} ${
+  price ? " * " + price : ""
+} ${rating} ⭐ (${reviews})`;
+
 export default function About() {
   return (
     <View>
       <RestaurantImage image={image} />
-      <RestaurantTitle title={title} />
+      <RestaurantTitle name={name} />
       <RestaurantDescription description={description} />
     </View>
   );
