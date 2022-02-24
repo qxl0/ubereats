@@ -27,9 +27,9 @@ export default function MenuItem() {
             <BouncyCheckbox
               iconStyle={{
                 borderColor: "lightgray",
-                borderRadius: 20,
-                fillColor: "green",
+                borderRadius: 0,
               }}
+              fillColor="green"
             />
             <FoodInfo food={food} />
             <FoodImage food={food} />
