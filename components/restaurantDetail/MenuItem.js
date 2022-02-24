@@ -57,7 +57,7 @@ const FoodImage = ({ food }) => (
   <View>
     <Image
       source={{ uri: food.image }}
-      style={{ width: 100, height: 100, borderRadius: 20 }}
+      style={{ width: 80, height: 80, borderRadius: 20 }}
     />
   </View>
 );
