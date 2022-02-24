@@ -10,7 +10,7 @@ export default function ViewCart() {
         justifyContent: "center",
         flexDirection: "row",
         position: "absolute",
-        bottom: 230,
+        bottom: 130,
         zIndex: 999,
       }}
     >
