@@ -17,3 +17,5 @@ let cartReducer = (state = defaultState, action) => {
       return state;
   }
 };
+
+export default cartReducer;

@@ -4,7 +4,9 @@ import React from "react";
 import Home from "./screens/Home";
 import RestaurantDetail from "./screens/RestaurantDetail";
 import { Provider as ReduxProvider } from "react-redux";
-import store from "./redux/store";
+import configureStore from "./redux/store";
+
+const store = configureStore();
 
 export default function RootNavigation() {
   const stack = createStackNavigator();
