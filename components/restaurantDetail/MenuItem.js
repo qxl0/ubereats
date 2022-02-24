@@ -3,6 +3,7 @@ import React from "react";
 import { Divider } from "react-native-elements";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const foodsList = [
   {
@@ -19,22 +20,22 @@ const foodsList = [
     image: "https://i.ytimg.com/vi/BKxGodX9NGg/maxresdefault.jpg",
   },
   {
-    title: "Lasagna",
+    title: "Lasagna 2",
     description: "A delicious pasta dish",
-    price: "$13.50",
+    price: "$19.50",
     image:
       "https://media.istockphoto.com/photos/food-backgrounds-table-filled-with-large-variety-of-food-picture-id1155240408?k=20&m=1155240408&s=612x612&w=0&h=Zvr3TwVQ-wlfBnvGrgJCtv-_P_LUcIK301rCygnirbk=",
   },
   {
-    title: "Tandoori Chicken",
+    title: "Tandoori Chicken 2",
     description: "Amazing Indian dish with tenderloin chicken off the sizzle",
-    price: "$12.99",
+    price: "$18.99",
     image: "https://i.ytimg.com/vi/BKxGodX9NGg/maxresdefault.jpg",
   },
   {
-    title: "Lasagna",
+    title: "Lasagna 3",
     description: "A delicious pasta dish",
-    price: "$13.50",
+    price: "$23.50",
     image:
       "https://media.istockphoto.com/photos/food-backgrounds-table-filled-with-large-variety-of-food-picture-id1155240408?k=20&m=1155240408&s=612x612&w=0&h=Zvr3TwVQ-wlfBnvGrgJCtv-_P_LUcIK301rCygnirbk=",
   },
@@ -42,6 +43,8 @@ const foodsList = [
 
 export default function MenuItem({ restaurantName }) {
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.cartReducer.selectedItems.items);
+
   const selectItem = (item, checkboxValue) => {
     if (checkboxValue) {
       dispatch({
@@ -56,6 +59,10 @@ export default function MenuItem({ restaurantName }) {
     }
   };
 
+  const isSelected = (item, cartItems) => {
+    return Boolean(cartItems?.find((i) => i.title === item.title));
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       {foodsList.map((food, index) => (
@@ -67,6 +74,7 @@ export default function MenuItem({ restaurantName }) {
                 borderRadius: 0,
               }}
               onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+              isChecked={isSelected(food, items)}
               fillColor="green"
             />
             <FoodInfo food={food} />
