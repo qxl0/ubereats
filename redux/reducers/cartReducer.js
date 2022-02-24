@@ -13,6 +13,16 @@ let cartReducer = (state = defaultState, action) => {
       };
       console.log(newState, "👉");
       return newState;
+    case "REMOVE_FROM_CART":
+      let newState2 = { ...state };
+      newState2.selectedItems = {
+        items: state.selectedItems.items.filter(
+          (item) => item.title !== action.payload.title
+        ),
+        restaurantName: action.payload.restaurantName,
+      };
+      console.log(newState2, "❌");
+      return newState2;
     default:
       return state;
   }
