@@ -43,6 +43,7 @@ const foodsList = [
 export default function MenuItem({ restaurantName }) {
   const dispatch = useDispatch();
   const selectItem = (item) => {
+    console.log("item👉", item);
     dispatch({ type: "ADD_TO_CART", payload: { ...item, restaurantName } });
   };
 

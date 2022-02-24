@@ -40,6 +40,7 @@ export default function RestaurantItems({
     <>
       {restaurantsData.map((restaurant, index) => (
         <TouchableOpacity
+          key={index}
           activeOpacity={1}
           style={{
             marginBottom: 30,

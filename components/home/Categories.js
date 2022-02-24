@@ -55,7 +55,7 @@ export default function Categories() {
               style={{
                 width: 50,
                 height: 40,
-                ersizeMode: "contain",
+                resizeMode: "contain",
               }}
             />
             <Text
