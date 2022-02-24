@@ -42,9 +42,18 @@ const foodsList = [
 
 export default function MenuItem({ restaurantName }) {
   const dispatch = useDispatch();
-  const selectItem = (item) => {
-    console.log("item👉", item);
-    dispatch({ type: "ADD_TO_CART", payload: { ...item, restaurantName } });
+  const selectItem = (item, checkboxValue) => {
+    if (checkboxValue) {
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: { ...item, restaurantName },
+      });
+    } else {
+      dispatch({
+        type: "REMOVE_FROM_CART",
+        payload: { ...item, restaurantName },
+      });
+    }
   };
 
   return (
@@ -57,7 +66,7 @@ export default function MenuItem({ restaurantName }) {
                 borderColor: "lightgray",
                 borderRadius: 0,
               }}
-              onPress={() => selectItem(food)}
+              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
               fillColor="green"
             />
             <FoodInfo food={food} />
