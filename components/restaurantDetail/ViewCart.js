@@ -5,7 +5,9 @@ import OrderItem from "./OrderItem";
 
 export default function ViewCart() {
   const [modalVisible, setModalVisible] = useState(true);
-  const items = useSelector((state) => state.cartReducer.selectedItems.items);
+  const { items, restaurantName } = useSelector(
+    (state) => state.cartReducer.selectedItems
+  );
   const total = items
     .map((item) => Number(item.price.replace("$", "")))
     .reduce((prev, curr) => prev + curr, 0);
