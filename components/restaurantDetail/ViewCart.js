@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function ViewCart() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   const items = useSelector((state) => state.cartReducer.selectedItems.items);
   const total = items
     .map((item) => Number(item.price.replace("$", "")))
@@ -15,9 +15,27 @@ export default function ViewCart() {
 
   const checkoutModalContent = () => {
     return (
-      <TouchableOpacity onPress={() => setModalVisible(false)}>
-        <Text style={{ color: "white" }}>Checkout</Text>
-      </TouchableOpacity>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 30,
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "black",
+            padding: 10,
+            width: 150,
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity onPress={() => setModalVisible(false)}>
+            <Text style={{ color: "white" }}>Checkout</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   };
   return (
@@ -58,6 +76,7 @@ export default function ViewCart() {
                 width: 300,
                 position: "relative",
               }}
+              onPress={() => setModalVisible(true)}
             >
               <Text style={{ color: "white", fontSize: 20 }}>
                 View Cart {totalUSD}
