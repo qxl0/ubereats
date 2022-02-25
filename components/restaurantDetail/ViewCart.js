@@ -97,6 +97,7 @@ export default function ViewCart() {
       <Modal
         animationType="slide"
         visible={modalVisible}
+        transparent={true}
         onRequestClose={() => setModalVisible(false)}
       >
         {checkoutModalContent()}
