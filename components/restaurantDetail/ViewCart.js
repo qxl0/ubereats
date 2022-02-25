@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import OrderItem from "./OrderItem";
 
 export default function ViewCart() {
   const [modalVisible, setModalVisible] = useState(true);
@@ -23,6 +24,9 @@ export default function ViewCart() {
           marginTop: 30,
         }}
       >
+        {items.map((item, index) => (
+          <OrderItem key={index} item={item} />
+        ))}
         <View
           style={{
             backgroundColor: "black",
