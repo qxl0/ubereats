@@ -47,6 +47,15 @@ export default function ViewCart() {
       fontSize: 15,
       marginBottom: 10,
     },
+    checkoutButtonStyle: {
+      backgroundColor: "black",
+      marginTop: 20,
+      alignItems: "center",
+      padding: 13,
+      borderRadius: 30,
+      width: 300,
+      position: "relative",
+    },
   });
   const checkoutModalContent = () => {
     return (
@@ -60,9 +69,23 @@ export default function ViewCart() {
             <Text style={styles.subtotalText}>Subtotal</Text>
             <Text>{totalUSD}</Text>
           </View>
-          <View>
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text style={{ color: "white" }}>Checkout</Text>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <TouchableOpacity
+              style={styles.checkoutButtonStyle}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
+              <Text
+                style={{
+                  position: "absolute",
+                  right: 20,
+                  color: "white",
+                  fontSize: 15,
+                  top: 17,
+                }}
+              >
+                {total ? totalUSD : ""}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
