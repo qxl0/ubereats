@@ -20,14 +20,14 @@ const foodsList = [
     image: "https://i.ytimg.com/vi/BKxGodX9NGg/maxresdefault.jpg",
   },
   {
-    title: "Lasagna 2",
+    title: "Chilaquiles",
     description: "A delicious pasta dish",
     price: "$19.50",
     image:
       "https://media.istockphoto.com/photos/food-backgrounds-table-filled-with-large-variety-of-food-picture-id1155240408?k=20&m=1155240408&s=612x612&w=0&h=Zvr3TwVQ-wlfBnvGrgJCtv-_P_LUcIK301rCygnirbk=",
   },
   {
-    title: "Tandoori Chicken 2",
+    title: "Chicken Caesar Salad",
     description: "Amazing Indian dish with tenderloin chicken off the sizzle",
     price: "$18.99",
     image: "https://i.ytimg.com/vi/BKxGodX9NGg/maxresdefault.jpg",
