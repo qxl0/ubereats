@@ -1,4 +1,4 @@
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
@@ -51,23 +51,27 @@ export default function OrderCompleted() {
   }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <LottieView
-        source={require("../assets/animations/check-mark.json")}
-        style={{ height: 100, alignSelf: "center", marginBottom: 30 }}
-        autoPlay
-        speed={0.5}
-        loop={false}
-      />
-      <Text>
-        Your order at {restaurantName} has been placed for {totalUSD}
-      </Text>
-      <MenuItem foods={lastOrder.items} hideCheckbox={true} />
-      <LottieView
-        source={require("../assets/animations/cooking.json")}
-        style={{ height: 200, alignSelf: "center" }}
-        autoPlay
-        speed={0.5}
-      />
+      <View style={{ margin: 15, alignItems: "center", height: "100%" }}>
+        <LottieView
+          source={require("../assets/animations/check-mark.json")}
+          style={{ height: 100, alignSelf: "center", marginBottom: 30 }}
+          autoPlay
+          speed={0.5}
+          loop={false}
+        />
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+          Your order at {restaurantName} has been placed for {totalUSD}
+        </Text>
+        <ScrollView>
+          <MenuItem foods={lastOrder.items} hideCheckbox={true} />
+          <LottieView
+            source={require("../assets/animations/cooking.json")}
+            style={{ height: 200, alignSelf: "center" }}
+            autoPlay
+            speed={0.5}
+          />
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
