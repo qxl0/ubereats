@@ -28,12 +28,12 @@ export default function OrderCompleted() {
   const [total, setTotal] = useState(0);
   const [totalUSD, setTotalUSD] = useState(0);
   const calculateTotalUSD = () => {
-    setTotalUSD(
-      total.toLocaleString("en", {
-        style: "currency",
-        currency: "USD",
-      })
-    );
+    const temp = total.toLocaleString("en", {
+      style: "currency",
+      currency: "USD",
+    });
+    console.log(temp, "totalUSD");
+    setTotalUSD(temp);
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function OrderCompleted() {
         setLastOrder(doc.data());
         setRestaurantName(doc.data().restaurantName);
         setTotal(doc.data().total);
-        console.log(total, "💲");
+        console.log(total, "total ===>");
         calculateTotalUSD();
         console.log(totalUSD, "💲");
       });

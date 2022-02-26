@@ -34,40 +34,33 @@ export default function MenuItem({
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      {foods.map(
-        (food, index) => (
-          console.log(food.image, "🍒"),
-          (
-            <View key={index}>
-              <View style={styles.menuItemStyle}>
-                {hideCheckbox ? (
-                  <></>
-                ) : (
-                  <BouncyCheckbox
-                    iconStyle={{
-                      borderColor: "lightgray",
-                      borderRadius: 0,
-                    }}
-                    onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-                    isChecked={isSelected(food, items)}
-                    fillColor="green"
-                  />
-                )}
-                <FoodInfo food={food} />
-                <FoodImage
-                  food={food}
-                  marginLeft={marginLeft ? marginLeft : 0}
-                />
-              </View>
-              <Divider
-                width={0.5}
-                orientation="vertical"
-                style={{ marginHorizontal: 20 }}
+      {foods.map((food, index) => (
+        // console.log(food.image, "🍒"),
+        <View key={index}>
+          <View style={styles.menuItemStyle}>
+            {hideCheckbox ? (
+              <></>
+            ) : (
+              <BouncyCheckbox
+                iconStyle={{
+                  borderColor: "lightgray",
+                  borderRadius: 0,
+                }}
+                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                isChecked={isSelected(food, items)}
+                fillColor="green"
               />
-            </View>
-          )
-        )
-      )}
+            )}
+            <FoodInfo food={food} />
+            <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
+          </View>
+          <Divider
+            width={0.5}
+            orientation="vertical"
+            style={{ marginHorizontal: 20 }}
+          />
+        </View>
+      ))}
     </ScrollView>
   );
 }
