@@ -34,32 +34,40 @@ export default function MenuItem({
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      {foods.map((food, index) => (
-        <View key={index}>
-          <View style={styles.menuItemStyle}>
-            {hideCheckbox ? (
-              <></>
-            ) : (
-              <BouncyCheckbox
-                iconStyle={{
-                  borderColor: "lightgray",
-                  borderRadius: 0,
-                }}
-                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-                isChecked={isSelected(food, items)}
-                fillColor="green"
+      {foods.map(
+        (food, index) => (
+          console.log(food.image, "🍒"),
+          (
+            <View key={index}>
+              <View style={styles.menuItemStyle}>
+                {hideCheckbox ? (
+                  <></>
+                ) : (
+                  <BouncyCheckbox
+                    iconStyle={{
+                      borderColor: "lightgray",
+                      borderRadius: 0,
+                    }}
+                    onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                    isChecked={isSelected(food, items)}
+                    fillColor="green"
+                  />
+                )}
+                <FoodInfo food={food} />
+                <FoodImage
+                  food={food}
+                  marginLeft={marginLeft ? marginLeft : 0}
+                />
+              </View>
+              <Divider
+                width={0.5}
+                orientation="vertical"
+                style={{ marginHorizontal: 20 }}
               />
-            )}
-            <FoodInfo food={food} />
-            <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
-          </View>
-          <Divider
-            width={0.5}
-            orientation="vertical"
-            style={{ marginHorizontal: 20 }}
-          />
-        </View>
-      ))}
+            </View>
+          )
+        )
+      )}
     </ScrollView>
   );
 }
@@ -72,13 +80,15 @@ const FoodInfo = ({ food }) => (
   </View>
 );
 
-const FoodImage = ({ marginLeft, ...food }) => (
+const FoodImage = ({ marginLeft, food }) => (
   <View>
     <Image
-      source={{ uri: food.image }}
+      source={{
+        uri: food.image,
+      }}
       style={{
-        width: 70,
-        height: 70,
+        width: 80,
+        height: 80,
         borderRadius: 20,
         marginLeft: marginLeft,
       }}
