@@ -1,9 +1,22 @@
 import { SafeAreaView, Text } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
+import { collection, limit, query } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function OrderCompleted() {
+  const [lastOrder, setLastOrder] = useState({
+    items: [
+      {
+        title: "Bologna",
+        description: "With butter lettuce, tomato, and red onion",
+        price: "$10.00",
+        image:
+          "https://media.istockphoto.com/photos/food-backgrounds-table-filled-with-large-variety-of-food-picture-id1155240408?k=20&m=1155240408&s=612x612&w=0&h=Zvr3TwVQ-wlfBnvGrgJCtv-_P_LUcIK301rCygnirbk=",
+      },
+    ],
+  });
   const { items, restaurantName } = useSelector(
     (state) => state.cartReducer.selectedItems
   );
@@ -15,6 +28,22 @@ export default function OrderCompleted() {
     currency: "USD",
   });
 
+  useEffect(() => {
+    const getOrders = async () => {
+      const q = query(
+        collection(db, "orders"),
+        orderBy("createdAt", "desc"),
+        limit(1)
+      );
+      const unsub = onSanpshot(q, (snapshot) => {
+        snapshot.docs.map((doc) => {
+          setLastOrder(doc.data());
+        });
+      });
+    };
+
+    getOrders();
+  }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <LottieView
