@@ -5,11 +5,12 @@ import OrderItem from "./OrderItem";
 import { StyleSheet } from "react-native";
 import { db } from "../../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { FirebaseError } from "firebase/app";
 import { useDispatch } from "react-redux";
+import LottieView from "lottie-react-native";
 
 export default function ViewCart({ navigation }) {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const { items, restaurantName } = useSelector(
     (state) => state.cartReducer.selectedItems
@@ -22,15 +23,28 @@ export default function ViewCart({ navigation }) {
     currency: "USD",
   });
 
-  const addOrderToFireBase = async () => {
+  const addOrderToFireBase = () => {
     // add order record with multiple items
-    const orderRef = await addDoc(collection(db, "orders"), {
+    addDoc(collection(db, "orders"), {
       restaurantName,
       items,
       total,
       createdAt: serverTimestamp(),
+    }).then((orderRef) => {
+      console.log("ORDER SAVED: ", orderRef.id);
+      setTimeout(() => {
+        setLoading(false);
+
+        setModalVisible(false);
+        // clear Redux cart
+        clearStore();
+
+        navigation.navigate("OrderCompleted", {
+          restaurantName,
+          totalUSD,
+        });
+      }, 2500);
     });
-    console.log("ORDER SAVED: ", orderRef.id);
   };
 
   const clearStore = () => {
@@ -92,15 +106,7 @@ export default function ViewCart({ navigation }) {
             <TouchableOpacity
               style={styles.checkoutButtonStyle}
               onPress={() => {
-                setModalVisible(false);
                 addOrderToFireBase();
-
-                // clear Redux cart
-                clearStore();
-                navigation.navigate("OrderCompleted", {
-                  restaurantName,
-                  totalUSD,
-                });
               }}
             >
               <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>

@@ -24,16 +24,17 @@ export default function OrderCompleted() {
       },
     ],
   });
-  const { items, restaurantName } = useSelector(
-    (state) => state.cartReducer.selectedItems
-  );
-  const total = items
-    .map((item) => Number(item.price.replace("$", "")))
-    .reduce((prev, curr) => prev + curr, 0);
-  const totalUSD = total.toLocaleString("en", {
-    style: "currency",
-    currency: "USD",
-  });
+  const [restaurantName, setRestaurantName] = useState("");
+  const [total, setTotal] = useState(0);
+  const [totalUSD, setTotalUSD] = useState(0);
+  const calculateTotalUSD = () => {
+    setTotalUSD(
+      total.toLocaleString("en", {
+        style: "currency",
+        currency: "USD",
+      })
+    );
+  };
 
   useEffect(() => {
     const q = query(
@@ -45,6 +46,11 @@ export default function OrderCompleted() {
       snapshot.docs.map((doc) => {
         console.log(doc.data(), "🙄");
         setLastOrder(doc.data());
+        setRestaurantName(doc.data().restaurantName);
+        setTotal(doc.data().total);
+        console.log(total, "💲");
+        calculateTotalUSD();
+        console.log(totalUSD, "💲");
       });
     });
 
