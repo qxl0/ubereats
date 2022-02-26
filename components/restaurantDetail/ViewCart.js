@@ -6,8 +6,10 @@ import { StyleSheet } from "react-native";
 import { db } from "../../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
+import { useDispatch } from "react-redux";
 
 export default function ViewCart({ navigation }) {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const { items, restaurantName } = useSelector(
     (state) => state.cartReducer.selectedItems
@@ -31,6 +33,9 @@ export default function ViewCart({ navigation }) {
     console.log("ORDER SAVED: ", orderRef.id);
   };
 
+  const clearStore = () => {
+    dispatch({ type: "CLEAR_CART" });
+  };
   const styles = StyleSheet.create({
     modalContainer: {
       flex: 1,
@@ -89,6 +94,9 @@ export default function ViewCart({ navigation }) {
               onPress={() => {
                 setModalVisible(false);
                 addOrderToFireBase();
+
+                // clear Redux cart
+                clearStore();
                 navigation.navigate("OrderCompleted", {
                   restaurantName,
                   totalUSD,

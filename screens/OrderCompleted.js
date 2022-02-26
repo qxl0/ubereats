@@ -43,6 +43,7 @@ export default function OrderCompleted() {
     );
     const unsub = onSnapshot(q, (snapshot) => {
       snapshot.docs.map((doc) => {
+        console.log(doc.data(), "🙄");
         setLastOrder(doc.data());
       });
     });
