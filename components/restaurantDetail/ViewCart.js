@@ -24,6 +24,7 @@ export default function ViewCart({ navigation }) {
   });
 
   const addOrderToFireBase = () => {
+    setLoading(true);
     // add order record with multiple items
     addDoc(collection(db, "orders"), {
       restaurantName,
@@ -35,7 +36,6 @@ export default function ViewCart({ navigation }) {
       setTimeout(() => {
         setLoading(false);
 
-        setModalVisible(false);
         // clear Redux cart
         clearStore();
 
@@ -107,6 +107,7 @@ export default function ViewCart({ navigation }) {
               style={styles.checkoutButtonStyle}
               onPress={() => {
                 addOrderToFireBase();
+                setModalVisible(false);
               }}
             >
               <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
@@ -175,6 +176,30 @@ export default function ViewCart({ navigation }) {
           </View>
         </View>
       ) : null}
+      {loading ? (
+        <View
+          style={{
+            backgroundColor: "black",
+            position: "absolute",
+            opacity: 0.6,
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <LottieView
+            style={{
+              height: 200,
+            }}
+            source={require("../../assets/animations/scanner.json")}
+            autoPlay
+            speed={3}
+          ></LottieView>
+        </View>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
