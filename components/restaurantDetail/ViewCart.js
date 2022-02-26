@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
 import { StyleSheet } from "react-native";
+import { db } from "../../firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { FirebaseError } from "firebase/app";
 
 export default function ViewCart() {
   const [modalVisible, setModalVisible] = useState(true);
@@ -16,6 +19,17 @@ export default function ViewCart() {
     style: "currency",
     currency: "USD",
   });
+
+  const addOrderToFireBase = async () => {
+    // add order record with multiple items
+    const orderRef = await addDoc(collection(db, "orders"), {
+      restaurantName,
+      items,
+      total,
+      createdAt: serverTimestamp(),
+    });
+    console.log("ORDER SAVED: ", orderRef.id);
+  };
 
   const styles = StyleSheet.create({
     modalContainer: {
@@ -72,7 +86,10 @@ export default function ViewCart() {
           <View style={{ flexDirection: "row", justifyContent: "center" }}>
             <TouchableOpacity
               style={styles.checkoutButtonStyle}
-              onPress={() => setModalVisible(false)}
+              onPress={() => {
+                setModalVisible(false);
+                addOrderToFireBase();
+              }}
             >
               <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
               <Text
