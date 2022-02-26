@@ -8,7 +8,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 
 export default function ViewCart({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const { items, restaurantName } = useSelector(
     (state) => state.cartReducer.selectedItems
   );

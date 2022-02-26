@@ -1,9 +1,16 @@
 import { SafeAreaView, Text } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
-import { collection, limit, query } from "firebase/firestore";
+import {
+  collection,
+  limit,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../firebase";
+import MenuItem from "../components/restaurantDetail/MenuItem";
 
 export default function OrderCompleted() {
   const [lastOrder, setLastOrder] = useState({
@@ -29,20 +36,18 @@ export default function OrderCompleted() {
   });
 
   useEffect(() => {
-    const getOrders = async () => {
-      const q = query(
-        collection(db, "orders"),
-        orderBy("createdAt", "desc"),
-        limit(1)
-      );
-      const unsub = onSanpshot(q, (snapshot) => {
-        snapshot.docs.map((doc) => {
-          setLastOrder(doc.data());
-        });
+    const q = query(
+      collection(db, "orders"),
+      orderBy("createdAt", "desc"),
+      limit(1)
+    );
+    const unsub = onSnapshot(q, (snapshot) => {
+      snapshot.docs.map((doc) => {
+        setLastOrder(doc.data());
       });
-    };
+    });
 
-    getOrders();
+    return unsub;
   }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -56,7 +61,7 @@ export default function OrderCompleted() {
       <Text>
         Your order at {restaurantName} has been placed for {totalUSD}
       </Text>
-
+      <MenuItem foods={lastOrder.items} hideCheckbox={true} />
       <LottieView
         source={require("../assets/animations/cooking.json")}
         style={{ height: 200, alignSelf: "center" }}
