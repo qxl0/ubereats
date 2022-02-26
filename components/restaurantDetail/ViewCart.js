@@ -7,7 +7,7 @@ import { db } from "../../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
 
-export default function ViewCart() {
+export default function ViewCart({ navigation }) {
   const [modalVisible, setModalVisible] = useState(true);
   const { items, restaurantName } = useSelector(
     (state) => state.cartReducer.selectedItems
@@ -89,6 +89,10 @@ export default function ViewCart() {
               onPress={() => {
                 setModalVisible(false);
                 addOrderToFireBase();
+                navigation.navigate("OrderCompleted", {
+                  restaurantName,
+                  totalUSD,
+                });
               }}
             >
               <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
